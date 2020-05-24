@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'polls_app.apps.PollsAppConfig',
+    'screener.apps.ScreenerConfig',
     
     'django.contrib.admin',
     'django.contrib.auth',

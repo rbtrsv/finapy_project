@@ -21,6 +21,7 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('polls_app/', include('polls_app.urls')),
+    path('screener/', include('screener.urls'))
 
     # path('', views.main_app, name='main_app')
     # url(r'^admin/', include(admin.site.urls)),
