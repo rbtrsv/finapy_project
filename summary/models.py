@@ -46,3 +46,33 @@ class PriceToEarnings(models.Model):
 
     def __str__(self):
         return self.pe_reatio
+
+class Stock(models.Model):
+    stock_name = models.CharField(max_length=50)
+    stock_ticker = models.CharField(max_length=5)
+    stock_description = models.TextField(max_length=2000)
+    price_date = models.DateTimeField('price date')
+
+    previous_close = models.ForeignKey('PreviousClose', on_delete=models.CASCADE)
+    open_price =  models.ForeignKey('OpenPrice', on_delete=models.CASCADE)
+    enterprise_value =  models.ForeignKey('EnterpriseValue', on_delete=models.CASCADE)
+    market_cap = models.ForeignKey('MarketCap', on_delete=models.CASCADE)
+    eps = models.ForeignKey('EarningsPerShare', on_delete=models.CASCADE)
+    pe_reatio =  models.ForeignKey('PriceToEarnings', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.stock_name
+
+import uuid # Required for unique stock instances
+from django.contrib.auth.models import User
+
+class StockInstance(models.Model):
+    """Model representing a specific stock (i.e. that has been bought by a client)."""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, help_text='Unique ID for this particular stock across whole platform')
+    stock = models.ForeignKey('Stock', on_delete=models.SET_NULL, null=True)
+    # "blank=True" if you wish to permit empty values in forms. Here there is no owner of the stock.
+    client = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return f'{self.id} ({self.stock.stock_name})'
