@@ -32,7 +32,11 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'polls_app.apps.PollsAppConfig',
+    'catalog_app.apps.CatalogAppConfig',
+    'main_app.apps.MainAppConfig',
+
     'screener.apps.ScreenerConfig',
+    'summary.apps.SummaryConfig',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,10 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # My apps
-    # 'main_app',
-    # 'polls_app',
 ]
 
 MIDDLEWARE = [

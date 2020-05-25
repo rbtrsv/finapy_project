@@ -21,9 +21,10 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('polls_app/', include('polls_app.urls')),
-    path('screener/', include('screener.urls'))
+    path('screener/', include('screener.urls')),
+    path('summary/', include('summary.urls')),
 
-    # path('', views.main_app, name='main_app')
+    # path('', views.main_app, name='main_app'),
     # url(r'^admin/', include(admin.site.urls)),
     # url(r'', include('main_app.urls', namespace='main_app')),
 
