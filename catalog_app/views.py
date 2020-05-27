@@ -40,7 +40,7 @@ class BookListView(generic.ListView):
 
     context_object_name = 'rob_book_list'   # your own name for the list as a template variable
     queryset = Book.objects.filter(title__icontains='war')[:5] # Get 5 books containing the title war
-    template_name = 'books/book_list.html'  # Specify your own template name/location
+    template_name = 'books/book_list.html'  # Specify your own template name/location   || should be 'catalog_app/book_list.html'
 
     # def get_queryset(self):
     #     return Book.objects.filter(title__icontains='war')[:5] # Get 5 books containing the title war

@@ -8,11 +8,17 @@ from .models import Choice, Question
 
 # Create your views here.
 
+# View (function-based)
+# The index function below is exactly like index in catalog_app.views 
 # def index(request):
 #     latest_question_list = Question.objects.order_by('-pub_date')[:5]
 #     context = {'latest_question_list': latest_question_list}
-#     return render(request, 'polls_app/index.html', context)
+#     # We call render() to pass the list to a specified template
+#     return render(request, 'polls_app/index.html', context) 
 
+# View (class-based)
+# Use a class-based generic list view (ListView) — a class that inherits from an existing view.
+# Because the generic view already implements most of the functionality we need and follows Django best-practice, we will be able to create a more robust list view with less code.
 class IndexView(generic.ListView):
     template_name = 'polls_app/index.html'
     context_object_name = 'latest_question_list'
