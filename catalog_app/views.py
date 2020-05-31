@@ -36,11 +36,12 @@ def index(request):
 from django.views import generic
 
 class BookListView(generic.ListView):
+    """Generic class-based view for a list of books."""
     model = Book
 
     context_object_name = 'rob_book_list'   # your own name for the list as a template variable
     queryset = Book.objects.filter(title__icontains='war')[:5] # Get 5 books containing the title war
-    template_name = 'books/book_list.html'  # Specify your own template name/location   || should be 'catalog_app/book_list.html'
+    template_name = 'books/book_list.html'  # Specify your own template name/location   || should be 'catalog_app/book_list.html'?
 
     # def get_queryset(self):
     #     return Book.objects.filter(title__icontains='war')[:5] # Get 5 books containing the title war
@@ -55,6 +56,7 @@ class BookListView(generic.ListView):
 # from django.shortcuts import get_object_or_404
 
 class BookDetailView(generic.DetailView):
+    """Generic class-based detail view for a book."""
     model = Book
     paginate_by = 10
 
@@ -90,7 +92,7 @@ from django.urls import reverse
 
 from catalog_app.forms import RenewBookForm
 
-@permission_required('catalog.can_mark_returned')
+@permission_required('catalog_app.can_mark_returned')
 def renew_book_librarian(request, pk):
     """View function for renewing a specific BookInstance by librarian."""
     book_instance = get_object_or_404(BookInstance, pk=pk)
@@ -120,7 +122,7 @@ def renew_book_librarian(request, pk):
         'book_instance': book_instance,
     }
 
-    return render(request, 'catalog/book_renew_librarian.html', context)
+    return render(request, 'catalog_app/book_renew_librarian.html', context)
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy

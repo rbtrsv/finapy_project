@@ -51,7 +51,8 @@ class Stock(models.Model):
     stock_name = models.CharField(max_length=50)
     stock_ticker = models.CharField(max_length=5)
     stock_description = models.TextField(max_length=5000)
-    price_date = models.DateTimeField('price date')
+    price_date = models.DateTimeField(null=True, blank=True)
+    stock_halt = models.BooleanField(default=False)
 
     previous_close = models.ForeignKey('PreviousClose', on_delete=models.CASCADE)
     open_price =  models.ForeignKey('OpenPrice', on_delete=models.CASCADE)
@@ -59,6 +60,11 @@ class Stock(models.Model):
     market_cap = models.ForeignKey('MarketCap', on_delete=models.CASCADE)
     eps = models.ForeignKey('EarningsPerShare', on_delete=models.CASCADE)
     pe_ratio =  models.ForeignKey('PriceToEarnings', on_delete=models.CASCADE)
+
+    # Model metadata is “anything that’s not a field”, such as ordering options (ordering) or database table name (db_table)
+    class Meta:
+        ordering = ['stock_halt']
+        permissions = (("can_mark_trading_halt", "Set trading as halted"),)
 
     def __str__(self):
         return self.stock_name
@@ -76,6 +82,7 @@ class StockInstance(models.Model):
     INSTANCE_STATUS = (
             ('a', 'Available'),
             ('b', 'Borrowed'),
+            ('o', 'Owned')
         )
 
     def __str__(self):
