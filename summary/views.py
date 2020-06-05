@@ -45,12 +45,12 @@ class OwnedStocksByClientListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return StockInstance.objects.filter(client=self.request.user).filter(status__exact='o')
 
-import datetime
+# import datetime
 
-from django.contrib.auth.decorators import permission_required
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+# from django.contrib.auth.decorators import permission_required
+# from django.shortcuts import get_object_or_404
+# from django.http import HttpResponseRedirect
+# from django.urls import reverse
 
 # from summary.forms import StockHaltForm
 
