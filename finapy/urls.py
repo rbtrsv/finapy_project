@@ -17,10 +17,14 @@ from django.contrib import admin
 from django.urls import include, path
 
 # from main_app import views
+from catalog_app import views
+from screener import views
+from summary import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('polls_app/', include('polls_app.urls')),
+    path('catalog_app/', include('catalog_app.urls')),
     path('screener/', include('screener.urls')),
     path('summary/', include('summary.urls')),
 
